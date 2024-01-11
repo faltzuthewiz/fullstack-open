@@ -41,29 +41,14 @@ function App() {
   }
 
   const handleShowButton = (name) => {
-    const searchUrl = `https://studies.cs.helsinki.fi/restcountries/api/name/${name}`
-   // console.log(name)
-    console.log(searchUrl)
 
-    const filteredCountry = countries.find((country) => {
-      return country.name.common.toLowerCase() === name.toLowerCase()
+    const results = countries.filter((country) => {
+      return country.name.common.toLowerCase().includes(name.toLowerCase())
     })
-    setCountriesToShow(filteredCountry)
-    
-    console.log("this is the filtered country", filteredCountry)
+    setCountriesToShow(results)
 
-    /*
-    const [countriesToShow, setCountriesToShow] = useState([])
-
-    useEffect(() => {
-      fetch(searchUrl)
-        .then((response) => response.json())
-        .then(actualData => {
-          setCountriesToShow(actualData)
-        })
-    }, [searchUrl])
-    */
-  }
+    setFilterName('')
+  } 
 
   return (
     <>

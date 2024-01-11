@@ -1,6 +1,4 @@
 const Countries = ({ countries, showbtn }) => {
-
-    console.log(showbtn)
     
     return (
         <ul>

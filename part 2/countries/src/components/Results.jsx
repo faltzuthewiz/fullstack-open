@@ -3,8 +3,6 @@ import Country from "./Country"
 
 const Results = ({countries, showbtn}) => {
 
-    console.log(showbtn)
-
     if(countries === null) {
         return (
             <div>
