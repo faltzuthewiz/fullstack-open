@@ -1,7 +1,9 @@
 import Countries from "./Countries"
 import Country from "./Country"
 
-const Results = ({countries}) => {
+const Results = ({countries, showbtn}) => {
+
+    console.log(showbtn)
 
     if(countries === null) {
         return (
@@ -20,7 +22,7 @@ const Results = ({countries}) => {
         )
     } else if (countries.length > 1 && countries.length <= 10 ) {
         return (
-            <Countries countries={countries}/>
+            <Countries countries={countries} showbtn={showbtn}/>
         )
     } else {
         return (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import axios from 'axios'
 import Results from './components/Results'
 import Filter from './components/Filter'
 
@@ -13,10 +14,10 @@ function App() {
   const baseUrl = "https://studies.cs.helsinki.fi/restcountries/api/all"
 
   useEffect(() => {
-    fetch(baseUrl)
-      .then((response) => response.json())
-      .then(actualData => {
-        setCountries(actualData)
+    axios
+      .get(baseUrl)
+      .then(response => {
+        setCountries(response.data)
         setCountriesToShow(null)
       })
   }, [])
@@ -39,10 +40,35 @@ function App() {
     setFilterName(keyword)
   }
 
+  const handleShowButton = (name) => {
+    const searchUrl = `https://studies.cs.helsinki.fi/restcountries/api/name/${name}`
+   // console.log(name)
+    console.log(searchUrl)
+
+    const filteredCountry = countries.find((country) => {
+      return country.name.common.toLowerCase() === name.toLowerCase()
+    })
+    setCountriesToShow(filteredCountry)
+    
+    console.log("this is the filtered country", filteredCountry)
+
+    /*
+    const [countriesToShow, setCountriesToShow] = useState([])
+
+    useEffect(() => {
+      fetch(searchUrl)
+        .then((response) => response.json())
+        .then(actualData => {
+          setCountriesToShow(actualData)
+        })
+    }, [searchUrl])
+    */
+  }
+
   return (
     <>
       <Filter onChange={handleCountryFilter} value={filterName} />
-      <Results countries={countriesToShow} />
+      <Results countries={countriesToShow} showbtn={handleShowButton}/>
     </>
   )
 }
