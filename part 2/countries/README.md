@@ -1,8 +1,9 @@
-# React + Vite
+# Part 2 : countries
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Some screenshots from the finished project:
 
-Currently, two official plugins are available:
+[!A search bar for finding countries. The text below says 'Find countries by typing the name of the country in the field.'](https://github.com/faltzuthewiz/fullstack-open/blob/main/part%202/countries/screenshots/fullstack-countries_screenshot1.PNG)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[!Search results for the keyword 'no'. The list shows the names of eight countries and 'show' buttons next to them.](https://raw.githubusercontent.com/faltzuthewiz/fullstack-open/main/part%202/countries/screenshots/fullstack-countries_screenshot2.PNG)
+
+[!Country info -page showing Norway. The page shows general information of the country and the current weather of the country's capital.](https://raw.githubusercontent.com/faltzuthewiz/fullstack-open/main/part%202/countries/screenshots/fullstack-countries_screenshot3.PNG)
