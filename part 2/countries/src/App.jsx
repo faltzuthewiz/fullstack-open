@@ -20,6 +20,9 @@ function App() {
         setCountries(response.data)
         setCountriesToShow(null)
       })
+      .catch(error =>
+        console.log(error)
+      )
   }, [])
 
   const handleCountryFilter = (event) => {
