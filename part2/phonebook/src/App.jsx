@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
-import personService from './services/persons' 
+import personService from './services/persons'
 import Notification from './components/Notification'
 
 const App = () => {
@@ -11,14 +11,14 @@ const App = () => {
   const [className, setClassName] = useState(null)
 
   useEffect(() => {
-      personService
-        .getAll()
-          .then(initialPersons => {
-          setPersons(initialPersons)
-          setPersonsToDisplay(initialPersons)
-        })
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
+        setPersonsToDisplay(initialPersons)
+      })
   }, [])
- 
+
   const [newName, setNewName] = useState('')
   const [newPhoneNumber, setNewPhoneNumber] = useState('')
 
@@ -34,24 +34,24 @@ const App = () => {
 
     const checkNameObject = persons.find(o => o.name === newName)
     const checkNumberObj = persons.find(o => o.number === newPhoneNumber)
-    
+
     if (checkNameObject !== undefined) {
       const message = `${newName} is already added to phonebook, replace the old number with a new one?`
       if (window.confirm(message)) {
-        const changedPerson = { ...checkNameObject, name: {newName}}
+        const changedPerson = { ...checkNameObject, name: { newName } }
 
         personService.update(changedPerson.id, personObject)
           .then(returnedPerson => {
             setPersons(persons.map(person => person.id !== checkNameObject.id ? person : returnedPerson)),
-            setPersonsToDisplay(persons.map(person => person.id !== checkNameObject.id ? person : returnedPerson))
+              setPersonsToDisplay(persons.map(person => person.id !== checkNameObject.id ? person : returnedPerson))
             setNewName('')
             setNewPhoneNumber('')
             setMessage(`Successfully updated ${returnedPerson.name}'s number to ${returnedPerson.number}`)
             setClassName("success"),
-            setTimeout(() => {
-              setMessage(null)
-              setClassName(null)
-            }, 5000)
+              setTimeout(() => {
+                setMessage(null)
+                setClassName(null)
+              }, 5000)
           })
           .catch(error => {
             setMessage(`Could not update the information. Information of ${newName} has already been removed from server.`)
@@ -61,9 +61,9 @@ const App = () => {
               setClassName(null)
             }, 10000)
             setPersons(persons.filter((person) => person.id !== changedPerson.id)),
-            setPersonsToDisplay(persons.filter((person) => person.id !== changedPerson.id))
+              setPersonsToDisplay(persons.filter((person) => person.id !== changedPerson.id))
           })
-      } 
+      }
       setNewName('')
       setNewPhoneNumber('')
     } else if (checkNumberObj !== undefined) {
@@ -79,10 +79,10 @@ const App = () => {
           setNewPhoneNumber('')
           setMessage(`added ${returnedPerson.name}`)
           setClassName("success"),
-          setTimeout(() => {
-            setMessage(null)
-            setClassName(null)
-          }, 5000)
+            setTimeout(() => {
+              setMessage(null)
+              setClassName(null)
+            }, 5000)
         })
     }
   }
@@ -101,7 +101,7 @@ const App = () => {
     if (keyword !== '') {
       const results = persons.filter((person) => {
         return person.name.toLowerCase().includes(keyword.toLowerCase())
-      }) 
+      })
       setPersonsToDisplay(results)
     } else {
       setPersonsToDisplay(persons)
@@ -128,7 +128,7 @@ const App = () => {
           setMessage(`Information of ${person.name} has already been removed from server`)
           setClassName("error")
           setPersons(persons.filter((person) => person.id !== id)),
-          setPersonsToDisplay(persons.filter((person) => person.id !== id))
+            setPersonsToDisplay(persons.filter((person) => person.id !== id))
         })
     }
   }
@@ -136,12 +136,12 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification message={message} className={className}/>
+      <Notification message={message} className={className} />
       <Filter onChange={handleFilter} value={filterName} />
       <h2>Add a new</h2>
       <PersonForm onSubmit={addPerson}
-        name={{value: newName, onChange: handleNameChange}}
-        number={{value: newPhoneNumber, onChange: handlePhoneNumberChange}} />
+        name={{ value: newName, onChange: handleNameChange }}
+        number={{ value: newPhoneNumber, onChange: handlePhoneNumberChange }} />
       <h2>Numbers</h2>
       <Persons persons={personsToDisplay}
         onDelete={handleDelete}
